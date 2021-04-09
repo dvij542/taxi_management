@@ -74,7 +74,12 @@ public class DBHelper extends SQLiteOpenHelper {
     }
     public void update_curr_user(String email){
         SQLiteDatabase MyDB = this.getWritableDatabase();
-        Cursor cursor = MyDB.rawQuery("Select * from users where email = ?", new String[]{email});
+        Cursor cursor = MyDB.rawQuery("Select * from user where email = ?", new String[]{email});
+//        System.out.println(cursor.getCount());
+//        System.out.println(cursor.getColumnIndex("name"));
+        String a = new String();
+        cursor.moveToFirst();
+//        System.out.println(cursor.getString(2));
         User.age = cursor.getInt(cursor.getColumnIndex("age"));
         User.name = cursor.getString(cursor.getColumnIndex("name"));
         User.password = cursor.getString(cursor.getColumnIndex("password"));
