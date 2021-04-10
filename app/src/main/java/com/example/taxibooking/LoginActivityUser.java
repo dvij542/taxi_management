@@ -20,6 +20,7 @@ public class LoginActivityUser extends AppCompatActivity {
 
         username = (EditText) findViewById(R.id.email);
         password = (EditText) findViewById(R.id.password1);
+
         btnlogin = (Button) findViewById(R.id.btnsignin1);
         DB = new DBHelper(this);
 

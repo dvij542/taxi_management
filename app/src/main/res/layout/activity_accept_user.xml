@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".SignupActivityUser">
+    <TextView
+        android:id="@+id/hello"
+        android:textSize="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hey dude, we found a car for you!!"
+        android:layout_marginTop="30dp"/>
+    <TextView
+        android:id="@+id/details"
+        android:textSize="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Details are as follows :-"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/hello"/>
+    <TextView
+        android:id="@+id/driver_name"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Driver name : "
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/details"/>
+    <TextView
+        android:id="@+id/driver_phone"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Driver phone number : "
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/driver_name"/>
+    <TextView
+        android:id="@+id/car_no"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Car number : "
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/driver_phone"/>
+    <TextView
+        android:id="@+id/car_type"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Car model : "
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/car_no"/>
+    <TextView
+        android:id="@+id/arrival_dist"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Distance from your location : "
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/car_type"/>
+
+    <Button
+        android:id="@+id/btnaccept"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Accept booking"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/arrival_dist"/>
+
+    <Button
+        android:id="@+id/btnreject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reject"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/btnaccept"/>
+
+</RelativeLayout>

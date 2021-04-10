@@ -8,59 +8,64 @@
     tools:context=".SignupActivityUser">
     <TextView
         android:id="@+id/hello"
-        android:textSize="50dp"
+        android:textSize="25dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello!!"
+        android:text="Hey dude, your trip has started!!"
         android:layout_marginTop="30dp"/>
     <TextView
-        android:id="@+id/book_taxi"
+        android:id="@+id/details"
         android:textSize="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Book taxi"
+        android:text="Driver will be arriving soon :-"
         android:layout_marginTop="30dp"
         android:layout_below="@+id/hello"/>
-
-    <EditText
-        android:id="@+id/from"
+    <TextView
+        android:id="@+id/driver_name"
+        android:textSize="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="From"
+        android:text="Driver name : "
         android:layout_marginTop="30dp"
-        android:layout_below="@+id/book_taxi"/>
-
-    <EditText
-        android:id="@+id/to"
+        android:layout_below="@+id/details"/>
+    <TextView
+        android:id="@+id/driver_phone"
+        android:textSize="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="To"
+        android:text="Driver phone number : "
         android:layout_marginTop="30dp"
-        android:layout_below="@+id/from"/>
-
-    <EditText
+        android:layout_below="@+id/driver_name"/>
+    <TextView
+        android:id="@+id/car_no"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Car number : "
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/driver_phone"/>
+    <TextView
         android:id="@+id/car_type"
+        android:textSize="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Car type (optional)"
+        android:text="Car model : "
         android:layout_marginTop="30dp"
-        android:layout_below="@+id/to"/>
-
-
-    <Button
-        android:id="@+id/btnfind"
+        android:layout_below="@+id/car_no"/>
+    <TextView
+        android:id="@+id/arrival_dist"
+        android:textSize="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Find"
+        android:text="Distance from your location : "
         android:layout_marginTop="30dp"
         android:layout_below="@+id/car_type"/>
-
     <Button
         android:id="@+id/btnback"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Back"
         android:layout_marginTop="30dp"
-        android:layout_below="@+id/btnfind"/>
-
+        android:layout_below="@+id/arrival_dist"/>
 </RelativeLayout>
