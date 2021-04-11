@@ -198,6 +198,12 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.moveToFirst();
         return cursor.getString(cursor.getColumnIndex("route_id"));
     }
+    public Cursor get_driver_details(String driver_email){
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        Cursor cursor = MyDB.rawQuery("SELECT * from driver WHERE email=?",new String[]{driver_email});
+        cursor.moveToFirst();
+        return cursor;
+    }
 
     public void update_trip_details(String driver_name, String driver_no, String from, String to, String driver_loc, String car_no, String car_type, String driver_email){
         AvailableTrip.arrival_dist = getdist(driver_loc,from);
@@ -232,9 +238,30 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.moveToFirst();
         return (cursor.getInt(0)==1);
     }
+    public Cursor get_from_to(String route_id){
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        Cursor cursor = MyDB.rawQuery("SELECT s.location_name,t.location_name FROM route,location as s, location as t WHERE route_id = ? AND route.loc_start=s.location_id AND route.loc_end=t.location_id",new String[]{route_id});
+        cursor.moveToFirst();
+        return cursor;
+    }
+    public String get_loc_name(String loc_id){
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        Cursor cursor = MyDB.rawQuery("SELECT location_name FROM location WHERE location_id = ?",new String[]{loc_id});
+        cursor.moveToFirst();
+        return cursor.getString(0);
+    }
     public boolean has_active_trip_user(){
         SQLiteDatabase MyDB = this.getWritableDatabase();
         Cursor cursor = MyDB.rawQuery("SELECT * FROM booking_received WHERE user_email = ?",new String[]{User.email});
+        cursor.moveToFirst();
+        if (cursor.getCount()>0){
+            Cursor cursor_driver = get_driver_details(cursor.getString(2));
+            Cursor cursor_locs = get_from_to(cursor.getString(5));
+            update_trip_details(cursor_driver.getString(1),cursor_driver.getString(5)
+                    ,cursor_locs.getString(0),cursor_locs.getString(1),get_loc_name(cursor_driver.getString(10)),cursor_driver.getString(8),
+                    cursor_driver.getString(9),cursor.getString(2));
+            AvailableTrip.booking_id = cursor.getString(0);
+        }
         return (cursor.getCount()>0);
     }
 }
