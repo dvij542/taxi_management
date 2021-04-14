@@ -27,6 +27,13 @@ public class MainActivityWelcome extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        driverlogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), SignupActivityDriver.class);
+                startActivity(intent);
+            }
+        });
         adminlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

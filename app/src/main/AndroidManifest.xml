@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DriverHome"></activity>
+        <activity android:name=".LoginActivityDriver"></activity>
+        <activity android:name=".DriverHome" />
         <activity android:name=".AddRouteAdmin" />
         <activity android:name=".AddLocationAdmin" />
         <activity android:name=".HomeActivityAdmin" />

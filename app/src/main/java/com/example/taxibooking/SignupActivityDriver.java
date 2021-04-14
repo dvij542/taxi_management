@@ -52,7 +52,7 @@ public class SignupActivityDriver extends AppCompatActivity {
                         if(insert==true){
                             DB.update_curr_driver(email_);
                             Toast.makeText(SignupActivityDriver.this, "Registered successfully", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(), HomeActivityUser.class);
+                            Intent intent = new Intent(getApplicationContext(), DriverHome.class);
                             startActivity(intent);
                         }else{
                             Toast.makeText(SignupActivityDriver.this, "Registration failed", Toast.LENGTH_SHORT).show();
@@ -68,7 +68,7 @@ public class SignupActivityDriver extends AppCompatActivity {
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), LoginActivityUser.class);
+                Intent intent = new Intent(getApplicationContext(), LoginActivityDriver.class);
                 startActivity(intent);
             }
         });

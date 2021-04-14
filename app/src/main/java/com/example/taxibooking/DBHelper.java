@@ -165,6 +165,15 @@ public class DBHelper extends SQLiteOpenHelper {
         else
             return false;
     }
+
+    public Boolean checkpassword_driver(String email, String password){
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        Cursor cursor = MyDB.rawQuery("Select * from driver where email = ? and password = ?", new String[] {email,password});
+        if(cursor.getCount()>0)
+            return true;
+        else
+            return false;
+    }
     public void update_curr_user(String email){
         SQLiteDatabase MyDB = this.getWritableDatabase();
         Cursor cursor = MyDB.rawQuery("Select * from user where email = ?", new String[]{email});
