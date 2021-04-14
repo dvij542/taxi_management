@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 import com.example.taxibooking.User;
+import com.example.taxibooking.Driver;
 import com.example.taxibooking.AvailableTrip;
 
 public class DBHelper extends SQLiteOpenHelper {
@@ -125,6 +126,27 @@ public class DBHelper extends SQLiteOpenHelper {
         else
             return true;
     }
+    public Boolean insert_driver(String email, String password, String gender, Integer age, String name, String phone_no, String car_num, String car_type){
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        ContentValues contentValues= new ContentValues();
+        contentValues.put("email", email);
+        contentValues.put("password", password);
+        contentValues.put("age", age);
+        contentValues.put("gender", gender);
+        contentValues.put("name", name);
+        contentValues.put("phone_number", phone_no);
+        contentValues.put("rating", 3);
+        contentValues.put("is_available", 1);
+        contentValues.put("curr_car_number", car_num);
+        contentValues.put("curr_car_type", car_type);
+        contentValues.put("curr_car_loc", "1");
+
+
+        long result = MyDB.insert("driver", null, contentValues);
+        if(result==-1) return false;
+        else
+            return true;
+    }
 
     public Boolean checkemail_user(String email) {
         SQLiteDatabase MyDB = this.getWritableDatabase();
@@ -157,6 +179,26 @@ public class DBHelper extends SQLiteOpenHelper {
         User.gender = cursor.getString(cursor.getColumnIndex("gender"));
         User.email = email;
         User.phone_no = cursor.getString(cursor.getColumnIndex("phone_number"));
+    }
+    public void update_curr_driver(String email){
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        Cursor cursor = MyDB.rawQuery("Select * from driver where email = ?", new String[]{email});
+//        System.out.println(cursor.getCount());
+//        System.out.println(cursor.getColumnIndex("name"));
+        String a = new String();
+        cursor.moveToFirst();
+//        System.out.println(cursor.getString(2));
+        Driver.age = cursor.getInt(cursor.getColumnIndex("age"));
+        Driver.name = cursor.getString(cursor.getColumnIndex("name"));
+        Driver.password = cursor.getString(cursor.getColumnIndex("password"));
+        Driver.gender = cursor.getString(cursor.getColumnIndex("gender"));
+        Driver.email = email;
+        Driver.phone_number = cursor.getString(cursor.getColumnIndex("phone_number"));
+        Driver.curr_car_num = cursor.getString(cursor.getColumnIndex("curr_car_number"));
+        Driver.curr_car_loc = cursor.getString(cursor.getColumnIndex("curr_car_loc"));
+        Driver.curr_car_type = cursor.getString(cursor.getColumnIndex("curr_car_type"));
+        Driver.rating = cursor.getInt(cursor.getColumnIndex("rating"));
+        Driver.is_available = cursor.getInt(cursor.getColumnIndex("is_available"));
     }
     public Cursor find_trip(String from, String to, String car_type){
         SQLiteDatabase MyDB = this.getWritableDatabase();
