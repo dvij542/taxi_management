@@ -30,4 +30,11 @@
         android:text="Sign in"
         android:layout_marginTop="50dp"
         android:layout_below="@+id/password1"/>
+    <Button
+        android:id="@+id/btnback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Home"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/btnsignin1"/>
 </RelativeLayout>

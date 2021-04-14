@@ -11,7 +11,7 @@ import com.example.taxibooking.User;
 
 public class LoginActivityUser extends AppCompatActivity {
     EditText username, password;
-    Button btnlogin;
+    Button btnlogin,btnback;
     DBHelper DB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +22,7 @@ public class LoginActivityUser extends AppCompatActivity {
         password = (EditText) findViewById(R.id.password1);
 
         btnlogin = (Button) findViewById(R.id.btnsignin1);
+        btnback = (Button) findViewById(R.id.btnback);
         DB = new DBHelper(this);
 
         btnlogin.setOnClickListener(new View.OnClickListener() {
@@ -44,6 +45,13 @@ public class LoginActivityUser extends AppCompatActivity {
                         Toast.makeText(LoginActivityUser.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
                     }
                 }
+            }
+        });
+        btnback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent  = new Intent(getApplicationContext(), MainActivityWelcome.class);
+                startActivity(intent);
             }
         });
     }
