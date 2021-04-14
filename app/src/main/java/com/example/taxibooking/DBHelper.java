@@ -397,4 +397,82 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return (cursor.getCount()>0);
     }
+
+    public String get_location_by_email(String s) {
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        Cursor cursor = MyDB.rawQuery("SELECT location_name from location where location_id in(SELECT curr_car_loc FROM driver WHERE email = ?)",new String[]{s});
+        cursor.moveToFirst();
+        return cursor.getString(0);
+    }
+
+    public void start_trip(String driver_email) {
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        MyDB.execSQL("UPDATE booking_received SET is_started = 1 where driver_email = ?",new String[]{driver_email});
+
+
+    }
+
+    public void end_trip(String driver_email) {
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+
+        Cursor cursor = MyDB.rawQuery("SELECT * from booking_received where driver_email = ?",new String[]{driver_email});
+        cursor.moveToFirst();
+        String booking_id = cursor.getString(0);
+        String route_id = cursor.getString(5);
+        ContentValues contentValues= new ContentValues();
+        long curr_id = System.currentTimeMillis();
+        contentValues.put("booking_id", booking_id);
+        contentValues.put("car_num", cursor.getString(1));;
+        contentValues.put("driver_email", cursor.getString(2));;
+        contentValues.put("time_start", cursor.getLong(4));
+        contentValues.put("time_end", System.currentTimeMillis());
+        contentValues.put("route_id", cursor.getString(5));
+        contentValues.put("user_email", cursor.getString(6));
+        AvailableTrip.booking_id = Long.toString(curr_id);
+        long result = MyDB.insert("trip_completed", null, contentValues);
+
+        MyDB.execSQL("UPDATE driver SET is_available = 1 where email = ?",new String[]{driver_email});
+        MyDB.execSQL("UPDATE driver SET curr_car_loc = (select loc_end from route where route_id = ? ) where email = ?", new String[]{route_id,driver_email});
+        MyDB.execSQL("DELETE from booking_received where driver_email = ?",new String[]{driver_email});
+    }
+
+    public void get_booking() {
+        String email = Driver.email;
+
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        Cursor cursor = MyDB.rawQuery("SELECT * from booking_received where driver_email = ?",new String[]{email});
+        if(cursor.moveToFirst())
+        {
+            Booking.booking_id = cursor.getString(0);
+            Booking.driver_email = cursor.getString(2);
+            Booking.is_started = cursor.getInt(3);
+            Booking.route_id = cursor.getString(5);
+            Booking.user_email = cursor.getString(6);
+            Cursor cursor1 = MyDB.rawQuery("SELECT * from route where route_id = ?",new String[]{Booking.route_id});
+            cursor1.moveToFirst();
+
+            Booking.start_loc = cursor1.getString(1);
+            Cursor cursor12 = MyDB.rawQuery("SELECT location_name from location where location_id = ?",new String[]{Booking.start_loc});
+            cursor12.moveToFirst();
+            Booking.start_loc = cursor12.getString(0);
+
+            Booking.end_loc = cursor1.getString(2);
+            Cursor cursor11 = MyDB.rawQuery("SELECT location_name from location where location_id = ?",new String[]{Booking.end_loc});
+            cursor11.moveToFirst();
+            Booking.end_loc = cursor11.getString(0);
+
+
+            Cursor cursor2 = MyDB.rawQuery("SELECT * from user where email = ?",new String[]{Booking.user_email});
+            cursor2.moveToFirst();
+            Booking.user_name = cursor2.getString(1);
+            Booking.user_phone = cursor2.getString(5);
+
+        }
+        else
+        {
+            Booking.booking_id = null;
+        }
+    }
+
+
 }
