@@ -81,7 +81,7 @@ public class DBHelper extends SQLiteOpenHelper {
         MyDB.execSQL("INSERT INTO driver VALUES(\"d1@gmail.com\",\"Nikhil Driver\",\"Male\",20,\"pass1\",\"9292929292\",NULL,1,\"GJ5408\",\"sedan\",\"1\");");
         MyDB.execSQL("INSERT INTO driver VALUES(\"d2@gmail.com\",\"Second Driver\",\"Male\",20,\"pass1\",\"9292929292\",NULL,1,\"GJ5401\",\"basic\",\"2\");");
         MyDB.execSQL("INSERT INTO user VALUES(\"dvij123\",\"Dvij\",\"Male\",20,\"pass\",\"9992999200\");");
-       // MyDB.execSQL("INSERT INTO booking_received VALUES(\"dvij123\",\"Dvij\",\"Male\",20,\"pass\",\"9992999200\");");
+        MyDB.execSQL("INSERT INTO booking_received VALUES(\"1112\",\"GJ5408\",\"d1@gmail.com\",0,343434343,\"12\",\"dvij123\");");
 
     }
 
@@ -120,6 +120,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "  `location_name` varchar(50),\n" +
                 "  `is_outstation` boolean\n" +
                 ");");
+        MyDB.execSQL("INSERT INTO booking_received VALUES(\"1112\",\"GJ5408\",\"d1@gmail.com\",0,343434343,\"I2\",\"dvij123\");");
+
     }
 
     public Boolean insert_user(String email, String password, String gender, Integer age, String name, String phone_no){
@@ -311,7 +313,7 @@ public class DBHelper extends SQLiteOpenHelper {
         long result = MyDB.insert("trip_completed", null, contentValues);
 
         MyDB.execSQL("UPDATE driver SET is_available = 1 where email = ?",new String[]{driver_email});
-        MyDB.execSQL("UPDATE driver SET curr_car_loc = (select loc_start from route where route_id = ? ) where email = ?", new String[]{route_id,driver_email});
+        MyDB.execSQL("UPDATE driver SET curr_car_loc = (select loc_end from route where route_id = ? ) where email = ?", new String[]{route_id,driver_email});
         MyDB.execSQL("DELETE from booking_received where driver_email = ?",new String[]{driver_email});
     }
 
@@ -329,8 +331,18 @@ public class DBHelper extends SQLiteOpenHelper {
             Booking.user_email = cursor.getString(6);
             Cursor cursor1 = MyDB.rawQuery("SELECT * from route where route_id = ?",new String[]{Booking.route_id});
             cursor1.moveToFirst();
+
             Booking.start_loc = cursor1.getString(1);
+            Cursor cursor12 = MyDB.rawQuery("SELECT location_name from location where location_id = ?",new String[]{Booking.start_loc});
+            cursor12.moveToFirst();
+            Booking.start_loc = cursor12.getString(0);
+
             Booking.end_loc = cursor1.getString(2);
+            Cursor cursor11 = MyDB.rawQuery("SELECT location_name from location where location_id = ?",new String[]{Booking.end_loc});
+            cursor11.moveToFirst();
+            Booking.end_loc = cursor11.getString(0);
+
+
             Cursor cursor2 = MyDB.rawQuery("SELECT * from user where email = ?",new String[]{Booking.user_email});
             cursor2.moveToFirst();
             Booking.user_name = cursor2.getString(1);

@@ -36,19 +36,20 @@ public class DriverHome extends AppCompatActivity {
         if(Booking.booking_id==null)
         {
             status = "No booking, Please wait for booking";
-            user_name.setText("User Name: " + Booking.user_name);
-            user_email.setText("Email: " + Booking.user_email);
-            user_phone.setText("Phone No: " + Booking.user_phone);
-            start_loc.setText("Pickup Location: " + Booking.start_loc);
-            end_loc.setText("Drop Location: " + Booking.end_loc);
-        }
-        else
-        {
             user_name.setText("User Name: ");
             user_email.setText("Email: ");
             user_phone.setText("Phone No: " );
             start_loc.setText("Pickup Location: " );
             end_loc.setText("Drop Location: " );
+        }
+        else
+        {
+            user_name.setText("User Name: " + Booking.user_name);
+            user_email.setText("Email: " + Booking.user_email);
+            user_phone.setText("Phone No: " + Booking.user_phone);
+            start_loc.setText("Pickup Location: " + Booking.start_loc);
+            end_loc.setText("Drop Location: " + Booking.end_loc);
+
             if(Booking.is_started == 1)
             {
                 status = "trip ongoing, end trip on reaching destination";
