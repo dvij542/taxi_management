@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".MainActivityWelcome">
+
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="75dp"
+        android:text="Welcome to KGP Taxi Booking!"
+        android:textAlignment="center"
+        android:textSize="26sp" />
+    <Button
+        android:id="@+id/userlogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Book a Cab"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/welcome"/>
+    <Button
+        android:id="@+id/driverlogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Driver Login"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/userlogin"/>
+    <Button
+        android:id="@+id/adminlogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Admin Login"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/driverlogin"/>
+</RelativeLayout>

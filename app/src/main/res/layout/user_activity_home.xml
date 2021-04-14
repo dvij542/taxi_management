@@ -1,66 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
-    tools:context=".SignupActivityUser">
-    <TextView
-        android:id="@+id/hello"
-        android:textSize="50dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Hello!!"
-        android:layout_marginTop="30dp"/>
-    <TextView
-        android:id="@+id/book_taxi"
-        android:textSize="30dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Book taxi"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/hello"/>
+    tools:context=".HomeActivityUser">
 
-    <EditText
-        android:id="@+id/from"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="From"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/book_taxi"/>
-
-    <EditText
-        android:id="@+id/to"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="To"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/from"/>
-
-    <EditText
-        android:id="@+id/car_type"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Car type (optional)"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/to"/>
-
-
-    <Button
-        android:id="@+id/btnfind"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Find"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/car_type"/>
-
-    <Button
-        android:id="@+id/btnback"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Back"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/btnfind"/>
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

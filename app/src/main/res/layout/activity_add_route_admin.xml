@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".AddRouteAdmin">
+
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="75dp"
+        android:text="Add Routes!"
+        android:textAlignment="center"
+        android:textSize="26sp" />
+
+    <EditText
+        android:id="@+id/routeid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Route ID"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/welcome"/>
+
+    <EditText
+        android:id="@+id/locstart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Start Location"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/routeid"/>
+
+    <EditText
+        android:id="@+id/locend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="End Location"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/locstart"/>
+
+    <EditText
+        android:id="@+id/dis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Distance"
+        android:inputType="number"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/locend"/>
+
+    <Button
+        android:id="@+id/add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Route"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/dis"/>
+
+    <Button
+        android:id="@+id/back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/add"/>
+</RelativeLayout>

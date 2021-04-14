@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".AddLocationAdmin">
+
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="75dp"
+        android:text="Add Locations!"
+        android:textAlignment="center"
+        android:textSize="26sp" />
+
+    <EditText
+        android:id="@+id/locationid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Location ID"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/welcome"/>
+
+    <EditText
+        android:id="@+id/locationname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Location Name"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/locationid"/>
+
+    <EditText
+        android:id="@+id/isoutstation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Is Outstation"
+        android:inputType="number"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/locationname"/>
+
+    <Button
+        android:id="@+id/add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Location"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/isoutstation"/>
+    <Button
+        android:id="@+id/back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/add"/>
+</RelativeLayout>

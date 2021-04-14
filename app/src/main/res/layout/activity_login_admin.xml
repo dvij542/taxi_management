@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    tools:context=".LoginActivityUser">
+    tools:context=".LoginActivityAdmin">
 
     <EditText
         android:id="@+id/email"
@@ -20,13 +20,14 @@
         android:layout_height="wrap_content"
         android:hint="Password"
         android:layout_marginTop="50dp"
+        android:inputType="textPassword"
         android:layout_below="@+id/email"/>
 
     <Button
         android:id="@+id/btnsignin1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sign in"
+        android:text="Login"
         android:layout_marginTop="50dp"
         android:layout_below="@+id/password1"/>
 </RelativeLayout>
