@@ -27,6 +27,8 @@ public class SignupActivityUser extends AppCompatActivity {
 
         signup = (Button) findViewById(R.id.btnsignup);
         signin = (Button) findViewById(R.id.btnsignin);
+        signin = (Button) findViewById(R.id.btndriver);
+
         DB = new DBHelper(this);
 
         signup.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +66,13 @@ public class SignupActivityUser extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), LoginActivityUser.class);
+                startActivity(intent);
+            }
+        });
+        signin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), DriverHome.class);
                 startActivity(intent);
             }
         });

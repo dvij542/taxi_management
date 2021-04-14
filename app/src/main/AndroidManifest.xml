@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DuringTripActivityUser"></activity>
+        <activity android:name=".DriverHome"></activity>
+        <activity android:name=".DuringTripActivityUser" />
         <activity android:name=".AcceptActivityUser" />
         <activity android:name=".HomeActivityUser" />
         <activity android:name=".LoginActivityUser" />

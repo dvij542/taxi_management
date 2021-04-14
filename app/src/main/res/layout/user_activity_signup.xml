@@ -74,5 +74,12 @@
         android:text="Existing user! Go to Sign in page"
         android:layout_marginTop="30dp"
         android:layout_below="@+id/btnsignup"/>
+    <Button
+        android:id="@+id/btndriver"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Go to driver page ploxx"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/btnsignin"/>
 
 </RelativeLayout>

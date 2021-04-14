@@ -7,7 +7,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 import com.example.taxibooking.User;
 import com.example.taxibooking.AvailableTrip;
-
+import com.example.taxibooking.Booking;
+import com.example.taxibooking.Driver;
 public class DBHelper extends SQLiteOpenHelper {
     public static final String DBNAME = "Login.db";
     public DBHelper(Context context) {
@@ -57,6 +58,15 @@ public class DBHelper extends SQLiteOpenHelper {
                 "  `route_id` varchar(10) NOT NULL,\n" +
                 "  `user_email` varchar(255) NOT NULL\n" +
                 ");");
+        MyDB.execSQL("CREATE TABLE `trip_completed` (\n" +
+                "  `booking_id` varchar(10) PRIMARY KEY,\n" +
+                "  `car_num` varchar(12) NOT NULL,\n" +
+                "  `driver_email` varchar(255) NOT NULL,\n" +
+                "  `time_start` varchar(255) NOT NULL,\n" +
+                "  `time_end` varchar(255) NOT NULL,\n" +
+                "  `route_id` varchar(10) NOT NULL,\n" +
+                "  `user_email` varchar(255) NOT NULL\n" +
+                ");");
         MyDB.execSQL("INSERT INTO location VALUES(\"0000000000\",\"Cab Base Point\",0);");
         MyDB.execSQL("INSERT INTO location VALUES(\"1\",\"MS\",0);");
         MyDB.execSQL("INSERT INTO location VALUES(\"2\",\"VS\",0);");
@@ -68,8 +78,8 @@ public class DBHelper extends SQLiteOpenHelper {
         MyDB.execSQL("INSERT INTO route VALUES (\"21\",\"2\",\"1\",12);");
         MyDB.execSQL("INSERT INTO route VALUES (\"13\",\"1\",\"3\",8);");
         MyDB.execSQL("INSERT INTO route VALUES (\"23\",\"2\",\"3\",8);");
-        MyDB.execSQL("INSERT INTO driver VALUES(\"d1@gmail.com\",\"Nikhil Driver\",\"Male\",20,\"pass1\",\"9292929292\",NULL,True,\"GJ5408\",\"sedan\",\"1\");");
-        MyDB.execSQL("INSERT INTO driver VALUES(\"d2@gmail.com\",\"Second Driver\",\"Male\",20,\"pass1\",\"9292929292\",NULL,True,\"GJ5401\",\"basic\",\"2\");");
+        MyDB.execSQL("INSERT INTO driver VALUES(\"d1@gmail.com\",\"Nikhil Driver\",\"Male\",20,\"pass1\",\"9292929292\",NULL,1,\"GJ5408\",\"sedan\",\"1\");");
+        MyDB.execSQL("INSERT INTO driver VALUES(\"d2@gmail.com\",\"Second Driver\",\"Male\",20,\"pass1\",\"9292929292\",NULL,1,\"GJ5401\",\"basic\",\"2\");");
         MyDB.execSQL("INSERT INTO user VALUES(\"dvij123\",\"Dvij\",\"Male\",20,\"pass\",\"9992999200\");");
     }
 
@@ -263,5 +273,70 @@ public class DBHelper extends SQLiteOpenHelper {
             AvailableTrip.booking_id = cursor.getString(0);
         }
         return (cursor.getCount()>0);
+    }
+
+    public String get_location_by_email(String s) {
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        Cursor cursor = MyDB.rawQuery("SELECT location_name from location where location_id in(SELECT curr_car_loc FROM driver WHERE email = ?)",new String[]{s});
+        cursor.moveToFirst();
+        return cursor.getString(0);
+    }
+
+    public void start_trip(String driver_email) {
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        MyDB.execSQL("UPDATE booking_received SET is_started = 1 where driver_email = ?",new String[]{driver_email});
+
+
+    }
+
+    public void end_trip(String driver_email) {
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+
+        Cursor cursor = MyDB.rawQuery("SELECT * from booking_received where driver_email = ?)",new String[]{driver_email});
+        cursor.moveToFirst();
+        String booking_id = cursor.getString(0);
+        String route_id = cursor.getString(5);
+        ContentValues contentValues= new ContentValues();
+        long curr_id = System.currentTimeMillis();
+        contentValues.put("booking_id", booking_id);
+        contentValues.put("car_num", cursor.getString(1));;
+        contentValues.put("driver_email", cursor.getString(2));;
+        contentValues.put("time_start", cursor.getLong(4));
+        contentValues.put("time_end", System.currentTimeMillis());
+        contentValues.put("route_id", cursor.getString(5));
+        contentValues.put("user_email", cursor.getString(6));
+        AvailableTrip.booking_id = Long.toString(curr_id);
+        long result = MyDB.insert("trip_completed", null, contentValues);
+
+        MyDB.execSQL("UPDATE driver SET is_available = 1 where email = ?",new String[]{driver_email});
+        MyDB.execSQL("UPDATE driver SET curr_car_loc = (select loc_start from route where route_id = ? ) where email = ?", new String[]{route_id,driver_email});
+        MyDB.execSQL("DELETE from booking_received where driver_email = ?",new String[]{driver_email});
+    }
+
+    public void get_booking() {
+        String email = Driver.email;
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        Cursor cursor = MyDB.rawQuery("SELECT * from booking_received where driver_email = ?)",new String[]{email});
+        if(cursor.moveToFirst())
+        {
+            Booking.booking_id = cursor.getString(0);
+            Booking.driver_email = cursor.getString(2);
+            Booking.is_started = cursor.getInt(3);
+            Booking.route_id = cursor.getString(5);
+            Booking.user_email = cursor.getString(6);
+            Cursor cursor1 = MyDB.rawQuery("SELECT * from route where route_id = ?",new String[]{Booking.route_id});
+            cursor1.moveToFirst();
+            Booking.start_loc = cursor1.getString(1);
+            Booking.end_loc = cursor1.getString(2);
+            Cursor cursor2 = MyDB.rawQuery("SELECT * from user where email = ?",new String[]{Booking.user_email});
+            cursor2.moveToFirst();
+            Booking.user_name = cursor2.getString(1);
+            Booking.user_phone = cursor2.getString(5);
+
+        }
+        else
+        {
+            Booking.booking_id = null;
+        }
     }
 }
