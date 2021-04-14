@@ -292,6 +292,97 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.moveToFirst();
         return cursor.getString(0);
     }
+    public Boolean insert_dummy_route(String route_id, String loc_start, String loc_end, Integer distance){
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        ContentValues contentValues= new ContentValues();
+        contentValues.put("route_id", route_id);
+        contentValues.put("loc_start", loc_start);
+        contentValues.put("loc_end", loc_end);
+        contentValues.put("distance", distance);
+        long result = MyDB.insert("route", null, contentValues);
+        if(result==-1) return false;
+        else
+            return true;
+    }
+
+    public Boolean insert_location(String loc_id, String loc_name, Integer is_outstation){
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        ContentValues contentValues= new ContentValues();
+        contentValues.put("location_id", loc_id);
+        contentValues.put("location_name", loc_name);
+        contentValues.put("is_outstation", is_outstation);
+        long result = MyDB.insert("location", null, contentValues);
+        insert_dummy_route(loc_id,loc_id,loc_id,0);
+        if(result==-1) return false;
+        else
+            return true;
+    }
+
+    public Boolean check_location(String loc_id,String loc_name) {
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        Cursor cursor = MyDB.rawQuery("Select * from location where location_id = ? or location_name = ?", new String[]{loc_id,loc_name});
+        if (cursor.getCount() > 0)
+            return true;
+        else
+            return false;
+    }
+
+    public Boolean insert_reverse_route(String route_id, String loc_start, String loc_end, Integer distance){
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        ContentValues contentValues= new ContentValues();
+        contentValues.put("route_id", route_id);
+        contentValues.put("loc_start", loc_start);
+        contentValues.put("loc_end", loc_end);
+        contentValues.put("distance", distance);
+        long result = MyDB.insert("route", null, contentValues);
+        if(result==-1) return false;
+        else
+            return true;
+    }
+
+    public Boolean insert_route(String route_id, String loc_start, String loc_end, Integer distance){
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        ContentValues contentValues= new ContentValues();
+        contentValues.put("route_id", route_id);
+        contentValues.put("loc_start", loc_start);
+        contentValues.put("loc_end", loc_end);
+        contentValues.put("distance", distance);
+        String idd = route_id + "rr";
+        insert_reverse_route(idd,loc_end,loc_start,distance);
+        long result = MyDB.insert("route", null, contentValues);
+        if(result==-1) return false;
+        else
+            return true;
+    }
+
+    public Boolean check_route_id(String route_id) {
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        Cursor cursor = MyDB.rawQuery("Select * from route where route_id = ?", new String[]{route_id});
+        if (cursor.getCount() > 0)
+            return true;
+        else
+            return false;
+    }
+
+    public Boolean check_route(String loc_start,String loc_end) {
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        Cursor cursor = MyDB.rawQuery("Select * from route where (loc_start = ? and loc_end = ?) or (loc_end = ? and loc_start = ?)", new String[]{loc_start,loc_end,loc_end,loc_start});
+        if (cursor.getCount() > 0)
+            return true;
+        else
+            return false;
+    }
+
+    public Boolean check_loc_already(String loc_start,String loc_end) {
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        Cursor cursor1 = MyDB.rawQuery("Select * from location where location_id = ?", new String[]{loc_start});
+        Cursor cursor2 = MyDB.rawQuery("Select * from location where location_id = ?", new String[]{loc_end});
+        if (cursor1.getCount() > 0 && cursor2.getCount()>0)
+            return true;
+        else
+            return false;
+    }
+
     public boolean has_active_trip_user(){
         SQLiteDatabase MyDB = this.getWritableDatabase();
         Cursor cursor = MyDB.rawQuery("SELECT * FROM booking_received WHERE user_email = ?",new String[]{User.email});
