@@ -58,10 +58,19 @@ public class DBHelper extends SQLiteOpenHelper {
                 "  `route_id` varchar(10) NOT NULL,\n" +
                 "  `user_email` varchar(255) NOT NULL\n" +
                 ");");
+        MyDB.execSQL("CREATE TABLE `trip_completed` (\n" +
+                "  `booking_id` varchar(10) PRIMARY KEY,\n" +
+                "  `car_num` varchar(12) NOT NULL,\n" +
+                "  `driver_email` varchar(255) NOT NULL,\n" +
+                "  `time_start` varchar(255) NOT NULL,\n" +
+                "  `time_end` varchar(255) NOT NULL,\n" +
+                "  `route_id` varchar(10) NOT NULL,\n" +
+                "  `user_email` varchar(255) NOT NULL\n" +
+                ");");
         MyDB.execSQL("INSERT INTO location VALUES(\"0000000000\",\"Cab Base Point\",0);");
         MyDB.execSQL("INSERT INTO location VALUES(\"MS\",\"MS\",0);");
         MyDB.execSQL("INSERT INTO location VALUES(\"VS\",\"VS\",0);");
-        MyDB.execSQL("INSERT INTO location VALUES(\"SNIG\",\"SNIG\",0);");
+        //MyDB.execSQL("INSERT INTO location VALUES(\"SNIG\",\"SNIG\",0);");
         MyDB.execSQL("INSERT INTO route VALUES (\"I2\",\"MS\",\"MS\",0);");
         MyDB.execSQL("INSERT INTO route VALUES (\"I3\",\"VS\",\"VS\",0);");
         //MyDB.execSQL("INSERT INTO route VALUES (\"I4\",\"3\",\"3\",0);");
