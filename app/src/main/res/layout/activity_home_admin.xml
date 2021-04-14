@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    tools:context=".MainActivityWelcome">
+    tools:context=".HomeActivityAdmin">
 
     <TextView
         android:id="@+id/welcome"
@@ -15,28 +15,28 @@
         android:layout_centerInParent="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="75dp"
-        android:text="Welcome to KGP Taxi Booking!"
+        android:text="Welcome Admin!"
         android:textAlignment="center"
         android:textSize="26sp" />
     <Button
-        android:id="@+id/userlogin"
+        android:id="@+id/addlocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Book a Cab"
+        android:text="Add Locations"
         android:layout_marginTop="50dp"
         android:layout_below="@+id/welcome"/>
     <Button
-        android:id="@+id/driverlogin"
+        android:id="@+id/addroute"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Driver Login"
+        android:text="Add Routes"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/userlogin"/>
+        android:layout_below="@+id/addlocation"/>
     <Button
-        android:id="@+id/adminlogin"
+        android:id="@+id/logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Admin Login"
+        android:text="Logout"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/driverlogin"/>
+        android:layout_below="@+id/addroute"/>
 </RelativeLayout>

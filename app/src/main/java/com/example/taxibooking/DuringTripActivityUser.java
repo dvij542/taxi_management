@@ -45,7 +45,7 @@ public class DuringTripActivityUser extends AppCompatActivity {
         btnback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent  = new Intent(getApplicationContext(), LoginActivityUser.class);
+                Intent intent  = new Intent(getApplicationContext(), MainActivityWelcome.class);
                 startActivity(intent);
             }
         });

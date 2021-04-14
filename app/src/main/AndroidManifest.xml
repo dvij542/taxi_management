@@ -9,13 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivityWelcome"></activity>
+        <activity android:name=".AddRouteAdmin"></activity>
+        <activity android:name=".AddLocationAdmin" />
+        <activity android:name=".HomeActivityAdmin" />
+        <activity android:name=".LoginActivityAdmin" />
+        <activity android:name=".SignupActivityUser" />
         <activity android:name=".SignupActivityDriver" />
         <activity android:name=".DuringTripActivityUser" />
         <activity android:name=".AcceptActivityUser" />
         <activity android:name=".HomeActivityUser" />
         <activity android:name=".LoginActivityUser" />
-        <activity android:name=".SignupActivityUser">
+        <activity android:name=".MainActivityWelcome">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,5 +27,5 @@
             </intent-filter>
         </activity>
     </application>
-
+    
 </manifest>
