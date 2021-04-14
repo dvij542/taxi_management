@@ -32,13 +32,58 @@
         android:text="Your Current Location is  : "
         android:layout_marginTop="30dp"
         android:layout_below="@+id/location"/>
+
+    <TextView
+        android:id="@+id/user_email"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="User Email : "
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/trip_status"/>
+    <TextView
+        android:id="@+id/user_name"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Your Current Location is  : "
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/user_email"/>
+    <TextView
+        android:id="@+id/user_phone"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Your Current Location is  : "
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/user_name"/>
+
+    <TextView
+        android:id="@+id/start_loc"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Your Current Location is  : "
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/user_phone"/>
+
+    <TextView
+        android:id="@+id/end_loc"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Your Current Location is  : "
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/start_loc"/>
+
+
     <Button
         android:id="@+id/start_trip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Start tripp"
         android:layout_marginTop="50dp"
-        android:layout_below="@+id/trip_status"/>
+        android:layout_below="@+id/end_loc"/>
 
     <Button
         android:id="@+id/end_trip"

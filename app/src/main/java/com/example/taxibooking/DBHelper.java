@@ -81,6 +81,8 @@ public class DBHelper extends SQLiteOpenHelper {
         MyDB.execSQL("INSERT INTO driver VALUES(\"d1@gmail.com\",\"Nikhil Driver\",\"Male\",20,\"pass1\",\"9292929292\",NULL,1,\"GJ5408\",\"sedan\",\"1\");");
         MyDB.execSQL("INSERT INTO driver VALUES(\"d2@gmail.com\",\"Second Driver\",\"Male\",20,\"pass1\",\"9292929292\",NULL,1,\"GJ5401\",\"basic\",\"2\");");
         MyDB.execSQL("INSERT INTO user VALUES(\"dvij123\",\"Dvij\",\"Male\",20,\"pass\",\"9992999200\");");
+       // MyDB.execSQL("INSERT INTO booking_received VALUES(\"dvij123\",\"Dvij\",\"Male\",20,\"pass\",\"9992999200\");");
+
     }
 
     @Override
@@ -292,7 +294,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void end_trip(String driver_email) {
         SQLiteDatabase MyDB = this.getWritableDatabase();
 
-        Cursor cursor = MyDB.rawQuery("SELECT * from booking_received where driver_email = ?)",new String[]{driver_email});
+        Cursor cursor = MyDB.rawQuery("SELECT * from booking_received where driver_email = ?",new String[]{driver_email});
         cursor.moveToFirst();
         String booking_id = cursor.getString(0);
         String route_id = cursor.getString(5);
@@ -314,9 +316,10 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public void get_booking() {
-        String email = Driver.email;
+        String email = "d1@gmail.com";//Driver.email;
+
         SQLiteDatabase MyDB = this.getWritableDatabase();
-        Cursor cursor = MyDB.rawQuery("SELECT * from booking_received where driver_email = ?)",new String[]{email});
+        Cursor cursor = MyDB.rawQuery("SELECT * from booking_received where driver_email = ?",new String[]{email});
         if(cursor.moveToFirst())
         {
             Booking.booking_id = cursor.getString(0);

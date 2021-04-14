@@ -11,7 +11,7 @@ import com.example.taxibooking.Booking;
 
 public class DriverHome extends AppCompatActivity {
 
-    TextView driver_name,driver_location,car_no,car_type,arrival_dist,trip_status;
+    TextView driver_name,driver_location,car_no,car_type,arrival_dist,trip_status,user_name,user_email,user_phone,start_loc,end_loc;
     String driver_email = "d1@gmail.com";
     Button btnstart, btnend;
     DBHelper DB;
@@ -24,13 +24,31 @@ public class DriverHome extends AppCompatActivity {
         driver_name = (TextView) findViewById(R.id.driver_name);
         driver_location = (TextView) findViewById(R.id.location);
         trip_status = (TextView) findViewById(R.id.trip_status);
+        user_name = (TextView) findViewById(R.id.user_name);
+        user_email = (TextView) findViewById(R.id.user_email);
+        user_phone = (TextView) findViewById(R.id.user_phone);
+        start_loc = (TextView) findViewById(R.id.start_loc);
+        end_loc = (TextView) findViewById(R.id.end_loc);
+
+
+
         String status = "";
         if(Booking.booking_id==null)
         {
             status = "No booking, Please wait for booking";
+            user_name.setText("User Name: " + Booking.user_name);
+            user_email.setText("Email: " + Booking.user_email);
+            user_phone.setText("Phone No: " + Booking.user_phone);
+            start_loc.setText("Pickup Location: " + Booking.start_loc);
+            end_loc.setText("Drop Location: " + Booking.end_loc);
         }
         else
         {
+            user_name.setText("User Name: ");
+            user_email.setText("Email: ");
+            user_phone.setText("Phone No: " );
+            start_loc.setText("Pickup Location: " );
+            end_loc.setText("Drop Location: " );
             if(Booking.is_started == 1)
             {
                 status = "trip ongoing, end trip on reaching destination";
@@ -44,24 +62,23 @@ public class DriverHome extends AppCompatActivity {
         String location = DB.get_location_by_email("d1@gmail.com");
         driver_name.setText("Name is :" + driver_email);
         driver_location.setText("Loc is: " + location);
-        //driver_location.setText("Loc : " + location);
-//        car_no = (TextView) findViewById(R.id.car_no);
-//        car_type = (TextView) findViewById(R.id.car_type);
-//        arrival_dist = (TextView) findViewById(R.id.arrival_dist);
+
         btnstart = (Button) findViewById(R.id.start_trip);
         btnend = (Button) findViewById(R.id.end_trip);
 
         btnstart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(Booking.booking_id!=null)
                 DB.start_trip(driver_email);
                 Intent intent  = new Intent(getApplicationContext(), DriverHome.class);
                 startActivity(intent);
             }
         });
-        btnstart.setOnClickListener(new View.OnClickListener() {
+        btnend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(Booking.booking_id!=null)
                 DB.end_trip(driver_email);
                 Intent intent  = new Intent(getApplicationContext(), DriverHome.class);
                 startActivity(intent);
