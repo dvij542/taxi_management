@@ -40,6 +40,7 @@ public class LoginActivityDriver extends AppCompatActivity {
                     if (checkdriverpass == true) {
                         Toast.makeText(LoginActivityDriver.this, "Sign in successfull", Toast.LENGTH_SHORT).show();
                         DB.update_curr_driver(email);
+                        DB.get_booking();
                         Intent intent = new Intent(getApplicationContext(), DriverHome.class);
                         startActivity(intent);
                     } else {

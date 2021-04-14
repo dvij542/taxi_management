@@ -11,9 +11,9 @@ import com.example.taxibooking.Booking;
 
 public class DriverHome extends AppCompatActivity {
 
-    TextView driver_name,driver_location,car_no,car_type,arrival_dist,trip_status,user_name,user_email,user_phone,start_loc,end_loc;
+    TextView driver_name,driver_location,trip_status,user_name,user_email,user_phone,start_loc,end_loc;
     String driver_email = Driver.email;//"d1@gmail.com";
-    Button btnstart, btnend;
+    Button btnstart, btnend,btnlogout;
     DBHelper DB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,12 +60,13 @@ public class DriverHome extends AppCompatActivity {
             }
         }
         trip_status.setText("Status: " + status);
-        String location = DB.get_location_by_email("d1@gmail.com");
-        driver_name.setText("Name is :" + driver_email);
+        String location = DB.get_location_by_email(driver_email);
+        driver_name.setText("Name is :" + Driver.name);
         driver_location.setText("Loc is: " + location);
 
         btnstart = (Button) findViewById(R.id.start_trip);
         btnend = (Button) findViewById(R.id.end_trip);
+        btnlogout = (Button) findViewById(R.id.logout);
 
         btnstart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +83,13 @@ public class DriverHome extends AppCompatActivity {
                 if(Booking.booking_id!=null)
                     DB.end_trip(driver_email);
                 Intent intent  = new Intent(getApplicationContext(), DriverHome.class);
+                startActivity(intent);
+            }
+        });
+        btnlogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent  = new Intent(getApplicationContext(), MainActivityWelcome.class);
                 startActivity(intent);
             }
         });

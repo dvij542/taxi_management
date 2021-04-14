@@ -51,6 +51,7 @@ public class SignupActivityDriver extends AppCompatActivity {
                         Boolean insert = DB.insert_driver(email_,pass,gender_,age_,name_,phone,car_num_,car_type_);
                         if(insert==true){
                             DB.update_curr_driver(email_);
+                            DB.get_booking();
                             Toast.makeText(SignupActivityDriver.this, "Registered successfully", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(), DriverHome.class);
                             startActivity(intent);

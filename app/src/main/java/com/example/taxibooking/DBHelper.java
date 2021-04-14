@@ -59,18 +59,18 @@ public class DBHelper extends SQLiteOpenHelper {
                 "  `user_email` varchar(255) NOT NULL\n" +
                 ");");
         MyDB.execSQL("INSERT INTO location VALUES(\"0000000000\",\"Cab Base Point\",0);");
-        MyDB.execSQL("INSERT INTO location VALUES(\"1\",\"MS\",0);");
-        MyDB.execSQL("INSERT INTO location VALUES(\"2\",\"VS\",0);");
-        MyDB.execSQL("INSERT INTO location VALUES(\"3\",\"SNIG\",0);");
-        MyDB.execSQL("INSERT INTO route VALUES (\"I2\",\"1\",\"1\",0);");
-        MyDB.execSQL("INSERT INTO route VALUES (\"I3\",\"2\",\"2\",0);");
-        MyDB.execSQL("INSERT INTO route VALUES (\"I4\",\"3\",\"3\",0);");
-        MyDB.execSQL("INSERT INTO route VALUES (\"12\",\"1\",\"2\",12);");
-        MyDB.execSQL("INSERT INTO route VALUES (\"21\",\"2\",\"1\",12);");
-        MyDB.execSQL("INSERT INTO route VALUES (\"13\",\"1\",\"3\",8);");
-        MyDB.execSQL("INSERT INTO route VALUES (\"23\",\"2\",\"3\",8);");
-        MyDB.execSQL("INSERT INTO driver VALUES(\"d1@gmail.com\",\"Nikhil Driver\",\"Male\",20,\"pass1\",\"9292929292\",NULL,True,\"GJ5408\",\"sedan\",\"1\");");
-        MyDB.execSQL("INSERT INTO driver VALUES(\"d2@gmail.com\",\"Second Driver\",\"Male\",20,\"pass1\",\"9292929292\",NULL,True,\"GJ5401\",\"basic\",\"2\");");
+        MyDB.execSQL("INSERT INTO location VALUES(\"MS\",\"MS\",0);");
+        MyDB.execSQL("INSERT INTO location VALUES(\"VS\",\"VS\",0);");
+        MyDB.execSQL("INSERT INTO location VALUES(\"SNIG\",\"SNIG\",0);");
+        MyDB.execSQL("INSERT INTO route VALUES (\"I2\",\"MS\",\"MS\",0);");
+        MyDB.execSQL("INSERT INTO route VALUES (\"I3\",\"VS\",\"VS\",0);");
+        //MyDB.execSQL("INSERT INTO route VALUES (\"I4\",\"3\",\"3\",0);");
+        MyDB.execSQL("INSERT INTO route VALUES (\"12\",\"MS\",\"VS\",12);");
+        MyDB.execSQL("INSERT INTO route VALUES (\"21\",\"VS\",\"MS\",12);");
+//        MyDB.execSQL("INSERT INTO route VALUES (\"13\",\"1\",\"3\",8);");
+//        MyDB.execSQL("INSERT INTO route VALUES (\"23\",\"2\",\"3\",8);");
+        MyDB.execSQL("INSERT INTO driver VALUES(\"d1@gmail.com\",\"Nikhil Driver\",\"Male\",20,\"pass1\",\"9292929292\",NULL,1,\"GJ5408\",\"sedan\",\"MS\");");
+        MyDB.execSQL("INSERT INTO driver VALUES(\"d2@gmail.com\",\"Second Driver\",\"Male\",20,\"pass1\",\"9292929292\",NULL,1,\"GJ5401\",\"basic\",\"MS\");");
         MyDB.execSQL("INSERT INTO user VALUES(\"dvij123\",\"Dvij\",\"Male\",20,\"pass\",\"9992999200\");");
     }
 
@@ -139,7 +139,7 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put("is_available", 1);
         contentValues.put("curr_car_number", car_num);
         contentValues.put("curr_car_type", car_type);
-        contentValues.put("curr_car_loc", "1");
+        contentValues.put("curr_car_loc", "MS");
 
 
         long result = MyDB.insert("driver", null, contentValues);

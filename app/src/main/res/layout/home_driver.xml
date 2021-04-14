@@ -92,5 +92,13 @@
         android:text="End tripp"
         android:layout_marginTop="50dp"
         android:layout_below="@+id/start_trip"/>
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/end_trip"/>
+
 
 </RelativeLayout>
